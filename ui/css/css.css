@@ -1,3 +1,25 @@
+body,input{
+    font-family: "Segoe UI","Segoe WP",Arial,Sans-Serif;
+}
+.tips>span{
+    display: inline-block;
+    padding: 6px 9px;
+    font-size: 11px;
+}
+.disclaim{
+    font-size: 11px;
+}
+ul{
+    margin: 6px 12px;
+    padding: 0;
+    line-height: 28px;
+}
+ul>li{
+    padding:
+}
+.list{
+    padding: 8px 18px;
+}
 .search input{
     display: block;
     width: 100%;

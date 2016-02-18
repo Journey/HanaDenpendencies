@@ -21,7 +21,8 @@ var CollapsibleTree = function(elt) {
     var placeHolder = d3.select(elt);
     var svg = placeHolder.append("svg:svg");
     var vis = svg
-        .append("svg:g");
+            .append("svg:g");
+    var centerNode = null;
 
 
     var that = {
@@ -42,6 +43,7 @@ var CollapsibleTree = function(elt) {
             vis.attr("transform", "translate(0," + ((h * data.parentDepth) / depth + 30) + ")");
 
             //root.children.forEach(that.toggleAll);
+	    centerNode = root.name;
             this.updateBoth(root);
         },
         updateBoth: function(source) {
@@ -74,6 +76,9 @@ var CollapsibleTree = function(elt) {
 
             nodeEnter.append("svg:circle")
                 .attr("r", function(d) {
+		    if(d.name === centerNode){
+			return 9;
+		    }
                     return 1e-6;
                 })
 		.attr("title",function(d){
@@ -129,13 +134,30 @@ var CollapsibleTree = function(elt) {
                 });
 
             nodeUpdate.select("circle")
-                .attr("r", 4.5)
+                .attr("r", function(d){
+		    if(d.name === centerNode){
+			return 9;
+		    }
+		    return 4.5;
+		})
                 .style("fill", function(d) {
                     return d._children ? "lightsteelblue" : "#fff";
                 });
 
             nodeUpdate.select("text")
-                .style("fill-opacity", 1);
+                .style("fill-opacity", 1)
+	        .style("font-size",function(d){
+		    if(d.name === centerNode){
+			return "14px";
+		    }
+		    return "11px";
+		})
+	        .style("stroke",function(d){
+		    if(d.name == centerNode){
+			return "#e66100";
+		    }
+		    return "none";
+		});
 
             // Transition exiting nodes to the parent's new position.
             var nodeExit = node.exit().transition()
@@ -287,7 +309,12 @@ var CollapsibleTree = function(elt) {
                 });
 
             nodeUpdate.select("circle")
-                .attr("r", 4.5)
+                .attr("r", function(d){
+		    if(d.name === centerNode){
+			return 9;
+		    }
+		    return 4.5;
+		})
                 .style("fill", function(d) {
                     return d._children ? "lightsteelblue" : "#fff";
                 });
@@ -416,7 +443,12 @@ var CollapsibleTree = function(elt) {
                 });
 
             nodeUpdate.select("circle")
-                .attr("r", 4.5)
+                .attr("r", function(d){
+		    if(d.name === centerNode){
+			return 9;
+		    }
+		    return 4.5;
+		})
                 .style("fill", function(d) {
                     return d._children ? "lightsteelblue" : "#fff";
                 });

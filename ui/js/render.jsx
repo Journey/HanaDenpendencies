@@ -10,7 +10,7 @@ var SearchBox = React.createClass({
 	if(input){
 	  input.focus();
 	}
-	}} name="fname" placeholder="Enter hana object name,e.g db.alert::alert_" onChange={this.onSearchChange} />
+	}} name="fname" placeholder="Enter hana object name,e.g db.alert::alert_" onKeyUp={this.onSearchChange} />
     </div>);
   }
 });
@@ -26,10 +26,23 @@ var List = React.createClass({
   }
 });
 
+var Tips = React.createClass({
+  render: function(){
+    return (
+      <div className="tips">
+	<span>Total Objects:({this.props.totalCount})</span>
+	<span>Filtered Objects:({this.props.filterCount})</span>
+      </div>
+    );
+  }
+});
+
 var ListContainer = React.createClass({
   getInitialState: function(){
     return {
-  	objects:[]
+      objects:[],
+      filterCount: 0,
+      totalCount: 0
     }
   },
   componentDidMount: function(){
@@ -41,13 +54,17 @@ var ListContainer = React.createClass({
 	  for(var obj in result){
 	    this.aObjects.push(obj);
 	  }
+	  this.setState({"totalCount":this.aObjects.length});
 	}
     }.bind(this));
   },
   updateList: function(){
     var filterList = [];
-    console.log(this.props.filter);
     if(!this.props.filter){
+      this.setState({
+	filterCount: 0,
+	objects: filterList
+      });
       return;
     }
     this.aObjects.forEach(function(objKey){
@@ -55,9 +72,9 @@ var ListContainer = React.createClass({
 	  filterList.push(objKey);
 	}
     }.bind(this));
-    console.log(filterList.length);
     this.setState({
-      objects:filterList
+      objects:filterList,
+      filterCount: filterList.length
     });
   },
   onClick: function(evt){
@@ -74,8 +91,11 @@ var ListContainer = React.createClass({
   },
   render: function() {
     return (
-      <div onClick={this.onClick}>
-	<List list={this.state.objects} />
+      <div>
+	<Tips totalCount={this.state.totalCount} filterCount={this.state.filterCount}></Tips>
+	<div onClick={this.onClick} className="list">
+	  <List list={this.state.objects} />
+	</div>
       </div>
     );
 	   
@@ -97,6 +117,7 @@ var Component = React.createClass({
   render: function(){
     return (
       <div className="component">
+	<div className="disclaim">Supported Objects:hdbtable,calculationview,hdbprocedure,attributeview,hdbview,hdbsequence,hdbstructure</div>
 	<SearchBox search={this.state.searchParam} searchTextChanged={this.searchParamUpdate}/>
 	<ListContainer ref="listInstance" source={this.props.source} filter={this.state.searchParam} />
       </div>

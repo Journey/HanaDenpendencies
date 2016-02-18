@@ -14,7 +14,6 @@ window.onload = function(){
     d3.json("data/relations.json", function(data){
 	if(key){
 	    var relations = Util.generate2WayTree(key, data);
-	    console.log(relations);
 	    treeObj = CollapsibleTree("#placeholder");
 	    treeObj.init(relations);
 	}
