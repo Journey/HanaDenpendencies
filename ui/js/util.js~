@@ -1,0 +1,37 @@
+function _initNodeObj(name,isParent){
+    return {
+	"name": name,
+	"isParent": isParent
+    };
+}
+function _addParent2Node(node,name){
+    if(node.parents !== undefined){
+	node.parents = [];
+    }
+    var subNode = _initNodeObj(name,true);
+    node.parents.push(_initNodeObj(name,true));
+    return subNode;
+}
+function _addChild2Node(node,name){
+    if(node.children !== undefined){
+	node.children = [];
+    }
+    var subNode = _initNodeObj(name,false);
+    node.children.push(subNode);
+    return subNode;
+}
+function _fillParents(){
+    
+}
+function _fillChilds(){
+    
+}
+var Util = {
+    generate2WayTree: function(key, allObj){
+	var centerNode = {
+	    "name": key,
+	    "parents":[],
+	    "children":[]
+	};
+    }
+};

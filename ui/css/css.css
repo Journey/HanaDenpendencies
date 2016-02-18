@@ -1,0 +1,14 @@
+.search input{
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    padding: 8px;
+    margin: 20px auto 8px;
+}
+.component{
+    width: 900px;
+    margin: 20px auto 12px;
+}
+.object-item{
+    cursor: pointer;
+}
