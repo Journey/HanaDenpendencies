@@ -5,11 +5,9 @@ body,input{
     display: inline-block;
     padding: 6px 9px;
     font-size: 11px;
-    color: #808080;
 }
 .disclaim{
     font-size: 11px;
-    color: #777;
 }
 ul{
     margin: 6px 12px;
@@ -17,7 +15,7 @@ ul{
     line-height: 28px;
 }
 ul>li{
-    color: #1a0dab;
+    padding:
 }
 .list{
     padding: 8px 18px;

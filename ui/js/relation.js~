@@ -29,7 +29,7 @@ var CollapsibleTree = function(elt) {
         init: function(data) {
             var depth = data.parentDepth + data.childDepth + 1;
             var height = depth * 150;
-	    var width = data.breadth * 180;
+	    var width = data.breadth * 300;
 	    height = height > 900 ? height : 900;
 	    width = width > 1280 ? width : 1280;
             var h = height - m[0] - m[2];
@@ -40,7 +40,7 @@ var CollapsibleTree = function(elt) {
             placeHolder.style("width", width).style("height", height);
             svg.attr("height", height).attr("width", width);
             tree.size([w, h]);
-            vis.attr("transform", "translate(100," + ((h * data.parentDepth) / depth + 30) + ")");
+            vis.attr("transform", "translate(0," + ((h * data.parentDepth) / depth + 30) + ")");
 
             //root.children.forEach(that.toggleAll);
 	    centerNode = root.name;
@@ -140,7 +140,7 @@ var CollapsibleTree = function(elt) {
                 .style("fill", function(d) {
                     return d._children ? "lightsteelblue" : "#fff";
                 });
-	    
+
             nodeUpdate.select("text")
                 .style("fill-opacity", 1)
 	        .style("font-size",function(d){

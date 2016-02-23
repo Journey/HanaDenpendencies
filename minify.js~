@@ -1,0 +1,11 @@
+var compressor = require('node-minify');
+// Array 
+new compressor.minify({
+  type: 'gcc',
+  fileIn: ['public/js/base.js', 'public/js/base2.js'],
+  fileOut: 'public/js-dist/base-onefile-gcc.js',
+  callback: function(err, min){
+    console.log(err);
+    //console.log(min); 
+  }
+});
